@@ -36,12 +36,12 @@ A first ruleset for the Quickstart
 rule hello_world {
     select when echo hello
     pre{
-      id = event:attr("id");
-      name = name(id)
+      id = event:attr("id").klog("The passed in id: ");
+      nm = name(id)
     }
     {
       send_directive("say") with
-        greeting = "Hello #{name}}";
+        greeting = "Hello #{nm}}";
     }
     always {
         log "LOG says Hello " + first + " " + last ;
