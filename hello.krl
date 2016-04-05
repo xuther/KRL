@@ -9,7 +9,7 @@ A first ruleset for the Quickstart
     logging on
     sharing on
     provides hello
- 
+
   }
   global {
     hello = function(obj) {
@@ -20,16 +20,15 @@ A first ruleset for the Quickstart
   }
   rule hello_world {
     select when echo hello
-    pre (
+    pre {
       name = event:attr("name").klog("our passed in Name: ");
-      )
+      }
     {
     send_directive("say") with
-      something = "Hello #(name)";;
+      something = "Hello #(name)";
     }
     always {
       log ("LOG says Hello " + name);
     }
   }
- 
-}
+ }
