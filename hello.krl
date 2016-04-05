@@ -20,8 +20,16 @@ A first ruleset for the Quickstart
   }
   rule hello_world {
     select when echo hello
+    pre (
+      name = event:attr("name").klog("our passed in Name: ");
+      )
+    {
     send_directive("say") with
-      something = "Hello World";
+      something = "Hello #(name)";;
+    }
+    always {
+      log ("LOG says Hello " + name);
+    }
   }
  
 }
