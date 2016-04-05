@@ -25,7 +25,7 @@ Trying out a second rule
       }
     {
     send_directive("say") with
-      something = "Yo #(name)";
+      something = "Yo #{name}";
     }
     always {
       log ("LOG says yo " + name);
