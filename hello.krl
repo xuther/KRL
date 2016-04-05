@@ -25,7 +25,7 @@ A first ruleset for the Quickstart
       }
     {
     send_directive("say") with
-      something = "Hello #(name)";
+      something = "Hello #{name}";
     }
     always {
       log ("LOG says Hello " + name);
