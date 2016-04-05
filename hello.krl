@@ -22,7 +22,7 @@ A first ruleset for the Quickstart
     users
   };
 
-  name = function() {
+  name = function(id) {
     allUsers = users();
     first = all_users{[id, "name", "first"]}.defaultsTo("HAL", "could not find user");
     last = all_users{[id, "name", "last"]}.defaultsTo("9000", "could not find user");
