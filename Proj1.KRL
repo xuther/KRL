@@ -9,7 +9,7 @@ ruleset set_one {
 		sharing on
 	}
 	rule hello {
-		select when echo message 
+		select when echo hello 
 		{
 		send_directive("say") with 
 			something = "Hello World"
