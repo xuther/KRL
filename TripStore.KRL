@@ -29,7 +29,7 @@ ruleset trip_store {
 
 			short = trips.filter(function(k,v) {
 					value = longTripMap.keys([k]).klog("KeyReturned:");
-					value.length() eq 0;
+					value.length().klog("Length: ") eq 0;
 				});
 			
 			short;
