@@ -32,6 +32,16 @@ ruleset manage_fleet {
 		}
 	}
 
+	rule test {
+		select when wrangler child_deletion 
+		pre {
+			eciDeleted = event:attr("deletionTarget").defaultsTo("", standardError("missing pico for deletion"));
+		}
+		always {
+			log("The wrangler event was fired. " + eciDeleted);
+		}
+	}
+
 	rule delete_vehicle {
 		select when car unneeded_vehicle
 		pre {
@@ -42,7 +52,7 @@ ruleset manage_fleet {
 			
 		}
 		{
-			event:send({"cid":meta:eci()},"wrangler" "child_deletion")
+			event:send({"cid":meta:eci()},"wrangler", "child_deletion")
 			with deletionTarget = picoECIToDelete;
 		}
 		always {
