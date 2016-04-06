@@ -1,6 +1,6 @@
 ruleset track_trip_Part2 {
 	meta {
-		name "Trip Tracker Part 2"
+		name "Trip_Tracker_Part_2"
 		description <<
 			Trip Tracker Part 2 for project 1.
 		>>
