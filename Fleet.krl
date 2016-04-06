@@ -41,12 +41,14 @@ ruleset manage_fleet {
 			//gotta figure out how to go name -> ECI. I can get the ECI with the wranglerOS.children.
 			
 		}
+		{
+			event:send({"cid":meta:eci()},"wrangler", "child_deletion")
+			with deletionTarget = picoECIToDelete;
+		}
 		always {
-			raise wrangler event "child_deletion"
-			with deletionTarget = picoECIToDelete
-			if(children.keys([picoECIToDelete]).length() > 0);
-			
-			log("deleting child Pico")
+
+			//if(children.keys([picoECIToDelete]).length() > 0);
+			log("deleting child Pico");
 		}
 	}
 
