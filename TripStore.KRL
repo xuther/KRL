@@ -8,16 +8,37 @@ ruleset trip_store {
 		logging on 
 		sharing on 
 	}
+
+	global {
+		trips = function() {
+			trips = ent:trips;
+			trips;
+		}
+
+		long_trips = function() {
+			long_trips = ent:longTrips;
+			long_trips;
+		}
+
+		short_trips = function() {
+			trips = trips().klog("Trips: ");
+			//longTrips = long_trips().klog("LongTrips: ");
+
+			//trips.filter(function(x)
+			trips;
+		}
+	}
 	
 	rule collect_trips {
 		select when explicit trip_processed 
 		pre {
 			milage = event:attr("_milage").klog("Collect Trips milage: ");
+			time = event:attr("_time").klog("Time: ");
+			id = event:attr("_tripID").klog("TripID: ");
 		}
 		fired {
-			set ent:trips {[ent:runningCollectID, "milage"]} milage;
-			set ent:trips {[ent:runningCollectID, "time"]} time:now();
-			set ent:runningCollectID ent:runningCollectID +1;
+			set ent:trips {[id, "milage"]} milage;
+			set ent:trips {[id, "time"]} time;
 			log ("Collect_Trips: " + milage);
 		}
 	}
@@ -26,12 +47,14 @@ ruleset trip_store {
 		select when explicit found_long_trip
 		pre {
 			milage = event:attr("_milage").klog("Collect Trips milage: ");
+			time = event:attr("_time").klog("Time: ");
+			id = event:attr("_tripID").klog("TripID: ");
 		}
 		fired {
 			set ent:longTrips {[ent:runningLongCount, "milage"]} milage;
 			set ent:longTrips {[ent:runningLongCount, "time"]} time:now();
-			set ent:runningLongCount ent:runningLongCount +1;
-			log ("Collect_long_Trips: " + ent:trips);
+
+			log ("Collect_long_Trips: " + milage + ": ID: " + id);
 		}
 	}
 
@@ -40,8 +63,6 @@ ruleset trip_store {
 		fired {
 			clear ent:trips;
 			clear ent:longTrips;
-			clear ent:runningLongCount;
-			clear ent:runningCollectID;
 			log("Cleared trips.");
 		}
 	}	

@@ -17,15 +17,21 @@ ruleset track_trip_Part2 {
 		select when car new_trip
 		pre {
 			milage = event:attr("milage").klog("Passed in milage: ");
+			tripID = ent:TripID + 1;
 		}
 		{
 			send_directive("trip") with 
 				trip_length = "#{milage}";
 		}
-		always{
+		fired{
 			raise explicit event trip_processed with 
-				_milage = milage;
-			log("Message fired with input " + input);
+				_milage = milage
+				and _time = time:Now()
+				and _id = tripID;
+
+			set ent:TripID =tripID
+
+			log("Message fired with input " + milage + " ID assigned was: " + tripID);
 		}
 	}
 
@@ -33,6 +39,8 @@ ruleset track_trip_Part2 {
 		select when explicit trip_processed 
 		pre {
 			milage = event:attr("_milage").klog("Milage passed into explicit event: ");
+			time = event:attr("_time").klog("Time: ");
+			id = event:attr("_tripID").klog("TripID: ");
 		}
 		fired {
 			//Init if not there
@@ -40,6 +48,8 @@ ruleset track_trip_Part2 {
 
 			raise explicit event found_long_trip with
 				_milage = milage 
+				and _time = time
+				and _id = id
 				if(milage > long_milage);
 		}
 	}
