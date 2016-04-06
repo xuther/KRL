@@ -26,7 +26,7 @@ ruleset trip_store {
 			longTripMap = ent:longTrips.klog("LongTrips: ");
 
 			short = trips.filter(function(k,v) {
-					longTripMap.keys([k]).klog("KeyReturned: ") != [];
+					longTripMap.keys([k]).klog("KeyReturned: #{k}") != [];
 				});
 			
 			short;
