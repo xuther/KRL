@@ -23,10 +23,10 @@ ruleset trip_store {
 
 		short_trips = function() {
 			trips = ent:trips.klog("Trips: ");
-			longTrips = end:longTrips.klog("LongTrips: ");
+			longTrips = ent:longTrips.klog("LongTrips: ");
 
 			short = trips.filter(function(k,v) {
-					longTrips.keys([k]) != [];
+					longTrips.keys([k]) != null;
 				});
 			
 			short;
