@@ -26,7 +26,7 @@ ruleset trip_store {
 			longTrips = long_trips().klog("LongTrips: ");
 
 			short = trips.filter(function(k,v) {
-					longTrips.keys(k) != null
+					longTrips.keys([k]) != null;
 				});
 			
 			short;
