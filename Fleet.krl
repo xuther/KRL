@@ -32,6 +32,18 @@ ruleset manage_fleet {
 		}
 	}
 
+	rule delete_vehicle {
+		select when car unneeded_vehicle
+		pre {
+			carName = event:attr("name").klog("Pico to Delete: ");
+			results = wranglerOS:children();
+			children = results{"children"}.klog("Children: ");
+		}
+		{
+			noop();
+		}
+	}
+
 	rule autoAccept {
 		select when wrangler inbound_pending_subscription_added 
 		pre {
