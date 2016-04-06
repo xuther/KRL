@@ -46,8 +46,8 @@ ruleset track_trip_Part2 {
 			milage = event:att("_milage").klog("Long trip found: ");
 		}
 		fired {
-			set ent:long_milage milage
-			log("found longest trip: " + long_milage);
+			set ent:long_milage milage;
+			log("Found longest trip: " + long_milage);
 		}
 	}
 }
