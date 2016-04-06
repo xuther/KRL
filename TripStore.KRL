@@ -7,6 +7,7 @@ ruleset trip_store {
 		author "Joseph Blodgett"
 		logging on 
 		sharing on 
+		provides trips, long_trips, short_trips
 	}
 
 	global {
