@@ -35,12 +35,18 @@ ruleset manage_fleet {
 	rule delete_vehicle {
 		select when car unneeded_vehicle
 		pre {
-			carName = event:attr("name").klog("Pico to Delete: ");
+			picoECIToDelete = event:attr("eci").klog("Pico to Delete: ");
 			results = wranglerOS:children();
 			children = results{"children"}.klog("Children: ");
+			//gotta figure out how to go name -> ECI. I can get the ECI with the wranglerOS.children.
+			
 		}
-		{
-			noop();
+		always {
+			raise wrangler event "child_deletion"
+			with deletionTarget = picoECIToDelete
+			if(children.keys([picoECIToDelete]).length() > 0);
+			
+			log("deleting child Pico")
 		}
 	}
 
