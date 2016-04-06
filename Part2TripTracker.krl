@@ -19,7 +19,8 @@ ruleset track_trip_Part2 {
 				trip_length = "#{milage}";
 		}
 		always{
-			raise explicit event trip_processed with _milage = milage
+			raise explicit event trip_processed with 
+				_milage = milage;
 			log("Message fired with input " + input);
 		}
 	}
