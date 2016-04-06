@@ -26,8 +26,8 @@ ruleset track_trip_Part2 {
 		fired{
 			raise explicit event trip_processed with 
 				_milage = milage
-				and _time = time:Now()
-				and _id = tripID;
+				and _time = time:now()
+				and _tripID = tripID;
 
 			set ent:TripID tripID;
 
@@ -49,7 +49,7 @@ ruleset track_trip_Part2 {
 			raise explicit event found_long_trip with
 				_milage = milage 
 				and _time = time
-				and _id = id
+				and _tripID = id
 				if(milage > long_milage);
 		}
 	}
