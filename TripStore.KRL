@@ -25,10 +25,13 @@ ruleset trip_store {
 			trips = trips().klog("Trips: ");
 			longTrips = long_trips().klog("LongTrips: ");
 
-			short_trips = trips.filter(function(k,v) {
+			short = trips.filter(function(k,v) {
 					longTrips.keys(k) != null
 				})
-			short_trips;
+
+			log("Found short trips: " + short);
+
+			short;
 		}
 	}
 	
