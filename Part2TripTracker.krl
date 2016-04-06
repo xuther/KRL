@@ -52,7 +52,7 @@ ruleset track_trip_Part2 {
 		fired {
 			//I misunderstood this - i though we were finding the longest trip. 
 			//set ent:long_milage milage;
-			log("Found longest trip: " + long_milage);
+			log("Found longest trip: " + milage);
 		}
 	}
 }
