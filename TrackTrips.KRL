@@ -10,7 +10,7 @@ ruleset track_trips {
 	}
 
 	rule process_trip {
-		select when echo message
+		select when explicit trip_processed
 		pre {
 			milage = event:attr("milage").klog("Passed in milage: ");
 		}
