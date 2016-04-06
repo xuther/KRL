@@ -37,6 +37,10 @@ ruleset manage_fleet {
 		pre {
 			eciDeleted = event:attr("deletionTarget").defaultsTo("", standardError("missing pico for deletion"));
 		}
+		{
+			send_directive("say") with 
+			something = "I Was fired!!";
+		}
 		always {
 			log("The wrangler event was fired. " + eciDeleted);
 		}
