@@ -15,8 +15,10 @@ ruleset trip_store {
 			milage = event:attr("_milage").klog("Collect Trips milage: ");
 		}
 		fired {
-			set ent:trips {[time:now()]} milage;
-			log ("Collect_Trips: " + ent:trips);
+			set ent:trips {[ent:runningCollectID, "milage"]} milage;
+			set ent:trips {[ent:runningCollectID, "time"]} time:now();
+			set ent:runningCollectID ent:runningCollectID +1;
+			log ("Collect_Trips: " + milage);
 		}
 	}
 
@@ -26,7 +28,9 @@ ruleset trip_store {
 			milage = event:attr("_milage").klog("Collect Trips milage: ");
 		}
 		fired {
-			set ent:longTrips {[time:now()]} milage;
+			set ent:longTrips {[ent:runningLongCount, "milage"]} milage;
+			set ent:longTrips {[ent:runningLongCount, "time"]} time:now();
+			set ent:runningLongCount ent:runningLongCount +1;
 			log ("Collect_long_Trips: " + ent:trips);
 		}
 	}
@@ -36,6 +40,8 @@ ruleset trip_store {
 		fired {
 			clear ent:trips;
 			clear ent:longTrips;
+			clear ent:runningLongCount;
+			clear ent:runningCollectID;
 			log("Cleared trips.");
 		}
 	}	
