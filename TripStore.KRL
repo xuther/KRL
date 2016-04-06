@@ -34,7 +34,8 @@ ruleset trip_store {
 	rule clear_trips {
 		select when car trip_reset 
 		fired {
-			clear ent:trips, ent:longTrips
+			clear ent:trips;
+			clear ent:longTrips;
 		}
 	}	
 }
