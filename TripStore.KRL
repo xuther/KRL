@@ -27,7 +27,7 @@ ruleset trip_store {
 		}
 		fired {
 			set ent:longTrips {[time:now()]} milage;
-			log ("Collect_Trips: " + ent:trips);
+			log ("Collect_long_Trips: " + ent:trips);
 		}
 	}
 
@@ -36,6 +36,7 @@ ruleset trip_store {
 		fired {
 			clear ent:trips;
 			clear ent:longTrips;
+			log("Cleared trips.");
 		}
 	}	
 }
