@@ -42,7 +42,7 @@ ruleset manage_fleet {
 			
 		}
 		{
-			raise wrangler event "child_deletion"
+			event:send({"cid":meta:eci()},"wrangler" "child_deletion")
 			with deletionTarget = picoECIToDelete;
 		}
 		always {
