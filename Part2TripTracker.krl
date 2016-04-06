@@ -30,8 +30,13 @@ ruleset track_trip_Part2 {
 		pre {
 			milage = event:attr("_milage").klog("Milage passed into explicit event: ");
 		}
-		always {
-			log("find_long_trips was fired with milage of" + milage);
+		fired {
+			//Init if not there
+			//set ent:long_milage init if not ent:long_milage{["_0"]};
+
+			raise explicit event found_long_trip with
+				_milage = milage 
+				if(milage > long_milage);
 		}
 	}
 
@@ -39,6 +44,10 @@ ruleset track_trip_Part2 {
 		select when explicit found_long_trip 
 		pre {
 			milage = event:att("_milage").klog("Long trip found: ");
+		}
+		fired {
+			set ent:long_milage milage
+			log("found longest trip: " + long_milage);
 		}
 	}
 }
