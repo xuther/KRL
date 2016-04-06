@@ -12,11 +12,11 @@ ruleset track_trips {
 	rule process_trip {
 		select when echo message
 		pre {
-			milage = event:attr("milate").klog("Passed in milage: ");
+			milage = event:attr("milage").klog("Passed in milage: ");
 		}
 		{
 			send_directive("trip") with 
-				trip_length = "#{input}";
+				trip_length = "#{milage}";
 		}
 		always{
 			log("Message fired with input " + input);
