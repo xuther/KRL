@@ -47,12 +47,12 @@ ruleset trip_store {
 		select when explicit found_long_trip
 		pre {
 			milage = event:attr("_milage").klog("Collect Trips milage: ");
-			time = event:attr("_time").klog("Time: ");
+			time = event:attr("_time").klog("time: ");
 			id = event:attr("_tripID").klog("TripID: ");
 		}
 		fired {
-			set ent:longTrips {[ent:runningLongCount, "milage"]} milage;
-			set ent:longTrips {[ent:runningLongCount, "time"]} time:now();
+			set ent:longTrips {[id, "milage"]} milage;
+			set ent:longTrips {[id, "time"]} time:now();
 
 			log ("Collect_long_Trips: " + milage + ": ID: " + id);
 		}

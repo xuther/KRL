@@ -18,6 +18,7 @@ ruleset track_trip_Part2 {
 		pre {
 			milage = event:attr("milage").klog("Passed in milage: ");
 			tripID = ent:TripID + 1;
+			time = time:now();
 		}
 		{
 			send_directive("trip") with 
@@ -26,7 +27,7 @@ ruleset track_trip_Part2 {
 		fired{
 			raise explicit event trip_processed with 
 				_milage = milage
-				and _time = time:now()
+				and _time = time
 				and _tripID = tripID;
 
 			set ent:TripID tripID;
