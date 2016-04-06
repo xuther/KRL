@@ -29,7 +29,7 @@ ruleset track_trip_Part2 {
 				and _time = time:Now()
 				and _id = tripID;
 
-			set ent:TripID =tripID
+			set ent:TripID tripID;
 
 			log("Message fired with input " + milage + " ID assigned was: " + tripID);
 		}
