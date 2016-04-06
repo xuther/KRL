@@ -9,6 +9,10 @@ ruleset track_trip_Part2 {
 		sharing on 
 	}
 
+	global {
+		long_milage = 50
+	}
+
 	rule process_trip {
 		select when car new_trip
 		pre {
@@ -43,10 +47,11 @@ ruleset track_trip_Part2 {
 	rule found_long_trip {
 		select when explicit found_long_trip 
 		pre {
-			milage = event:att("_milage").klog("Long trip found: ");
+			milage = event:attr("_milage").klog("Long trip found: ");
 		}
 		fired {
-			set ent:long_milage milage;
+			//I misunderstood this - i though we were finding the longest trip. 
+			//set ent:long_milage milage;
 			log("Found longest trip: " + long_milage);
 		}
 	}
