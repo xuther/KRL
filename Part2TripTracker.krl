@@ -1,12 +1,12 @@
 ruleset track_trip_Part2 {
 	meta {
-		name "Trip_Tracker_Part_2"
+		name "Trip_Tracker_2"
 		description <<
 			Trip Tracker Part 2 for project 1.
 		>>
 		author "Joseph Blodgett"
 		logging on 
-		sharing on
+		sharing on 
 	}
 
 	rule process_trip {
