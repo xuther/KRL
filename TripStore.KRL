@@ -18,5 +18,23 @@ ruleset trip_store {
 			set ent:trips {[time:now()]} milage;
 			log ("Collect_Trips: " + ent:trips);
 		}
+	}
+
+	rule collect_long_trips {
+		select when explicit found_long_trip
+		pre {
+			milage = event:attr("_milage").klog("Collect Trips milage: ");
+		}
+		fired {
+			set ent:longTrips {[time:now()]} milage;
+			log ("Collect_Trips: " + ent:trips);
+		}
+	}
+
+	rule clear_trips {
+		select when car trip_reset 
+		fired {
+			clear ent:trips, ent:longTrips
+		}
 	}	
 }
