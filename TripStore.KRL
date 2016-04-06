@@ -63,6 +63,7 @@ ruleset trip_store {
 		fired {
 			clear ent:trips;
 			clear ent:longTrips;
+			clear ent:TripID;
 			log("Cleared trips.");
 		}
 	}	
