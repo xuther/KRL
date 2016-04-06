@@ -27,7 +27,7 @@ ruleset trip_store {
 
 			short = trips.filter(function(k,v) {
 					longTrips.keys(k) != null
-				})
+				});
 			
 			short;
 		}
