@@ -17,7 +17,7 @@ ruleset trip_store {
 		}
 
 		long_trips = function() {
-			long_trips = ent:longTrips;
+			long_trips = ent:longTrips.klog("LongTrips: ");
 			long_trips;
 		}
 
