@@ -28,7 +28,8 @@ ruleset trip_store {
 			toCompare = ["milage", "time"];
 
 			short = trips.filter(function(k,v) {
-					longTripMap.keys([k]).klog("KeyReturned:") neq toCompare;
+					value = longTripMap.keys([k]).klog("KeyReturned:");
+					value.length() eq 0;
 				});
 			
 			short;
