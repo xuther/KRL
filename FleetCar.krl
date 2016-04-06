@@ -5,6 +5,7 @@ ruleset fleet_car {
 			ruleset for a car in the fleet.
 		>>
 		author "Joseph Blodgett"
+		use module b507199x5 alias wrangler_api
 		logging on 
 		sharing on
 	}
@@ -15,8 +16,8 @@ ruleset fleet_car {
 			parent_results = wrangler_api:parent();
 	       	parent = parent_results{'parent'};
 	       	parent_eci = parent[0];
-	       	attrs = {}.put(["name"],"Fleet")
-                      .put(["name_space"],"Tutorial_Subscriptions")
+	       	attrs = {}.put(["name"],event:attr("name"))
+                      .put(["name_space"],"Fleet_Subscription")
                       .put(["my_role"],"Vehicle")
                       .put(["your_role"],"Fleet")
                       .put(["target_eci"],parent_eci.klog("target Eci: "))

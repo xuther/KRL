@@ -7,6 +7,7 @@ ruleset manage_fleet {
 		author "Joseph Blodgett"
 		logging on 
 		sharing on
+		use module b507199x5 alias wranglerOS
 	}
 
 	rule create_vehicle {
