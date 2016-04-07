@@ -7,6 +7,7 @@ ruleset trip_store {
 		author "Joseph Blodgett"
 		logging on 
 		sharing on 
+		use module b507199x5 alias wranglerOS
 		provides trips, long_trips, short_trips, getParent
 	}
 
