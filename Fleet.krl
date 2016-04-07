@@ -10,6 +10,37 @@ ruleset manage_fleet {
 		use module b507199x5 alias wranglerOS
 	}
 
+	global {
+		cloud_url = "https://#{meta:host()}/sky/cloud/";
+
+		sendQuery = function(eci, mod, func) {
+			resp = http:get("#{cloud_url}#{mod}/#{func}", {}.put(["_eci"], eci));
+			code = response{"status_code"}.klog("response code from query: ");
+			response_content = response{"content"}.decode();
+			response_content
+		}
+
+		getVehicles = function() {
+			//Whaaaa?
+			WranglerIsConfusing = wranglerOS:subscriptions();
+			subs = WranglerIsConfusing{"subscriptions"};
+			vehicles = subscriptions{"suscribed"}.filter(
+						function(x) {
+							stuff = x.values().head();
+							stuff{"name_space"} eq "Fleet_Subscription"
+						}
+				)
+			vehicles
+		}
+
+
+		generateReport = function()
+		{
+				letsseeifwegetaAnything = getVehicles().klog("YO. Here be your vehicles, maybe: ");			
+				letsseeifwegetaAnything;
+		}
+	}
+
 	rule create_vehicle {
 		select when car new_vehicle 
 		pre {
