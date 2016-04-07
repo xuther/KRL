@@ -42,7 +42,7 @@ ruleset trip_store {
 			parent = subs{"subscribed"}.filter(
 					function(x) {
 						stuff = x.values().head();
-						namespace = stuff{"namespace"} eq "Fleet_Subscription";
+						namespace = stuff{"name_space"} eq "Fleet_Subscription";
 						parent = stuff{"relationship"} eq "Vehicle";
 						namespace && parent
 					}
