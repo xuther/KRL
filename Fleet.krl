@@ -23,7 +23,7 @@ ruleset manage_fleet {
 
 		getVehicles = function() {
 			//Whaaaa?
-			WranglerIsConfusing = wranglerOS:subscriptions();
+			WranglerIsConfusing = wranglerOS:subscriptions().klog("What we get back from first Layer: ");
 			subs = WranglerIsConfusing{"subscriptions"}.klog("What we get back from subscriptions: ");
 			vehicles = subs{"subscribed"}.filter(
 						function(x) {
