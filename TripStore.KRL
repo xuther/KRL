@@ -38,6 +38,7 @@ ruleset trip_store {
 		getParent = function() {
 			WranglerIsConfusing = wranglerOS:subscriptions().klog("What we get back from first Layer: ");
 			subs = WranglerIsConfusing{"subscriptions"}.klog("What we get back from subscriptions: ");
+			subs
 		}
 	}
 
@@ -47,8 +48,7 @@ ruleset trip_store {
 			index = event:attr("reportIndex").klog("Index being sent.");
 			parent = getParent()
 		}
-		fired {
-		}
+		
 	}
 	
 	rule collect_trips {
