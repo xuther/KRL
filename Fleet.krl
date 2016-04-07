@@ -50,6 +50,7 @@ ruleset manage_fleet {
 		select when car unneeded_vehicle
 		pre {
 			picoECIToDelete = event:attr("eci").klog("Pico to Delete: ");
+			subscriptionToDelete = event:attr("name").klog("Name of subscription to delete: ");
 			results = wranglerOS:children();
 			children = results{"children"}.klog("Children: ");
 			//gotta figure out how to go name -> ECI. I can get the ECI with the wranglerOS.children.
@@ -58,11 +59,10 @@ ruleset manage_fleet {
 		{
 			event:send({"cid":meta:eci()}, "wrangler", "child_deletion") 
 				with attrs = {}.put(["deletionTarget"], picoECIToDelete).klog("attributes for delete: ");
-		    //event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") 
-				//with attrs = {}.put(["channel_name"], name).klog("attributes for unsubscription: ");
+		    event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") 
+				with attrs = {}.put(["channel_name"], subscriptionToDelete).klog("attributes for unsubscription: ");
 		}
 		always {
-			//if(children.keys([picoECIToDelete]).length() > 0);
 			log("deleting child Pico");
 		}
 	}
