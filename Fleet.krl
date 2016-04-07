@@ -17,7 +17,7 @@ ruleset manage_fleet {
 			parentECI = meta:eci();
 
 			attributes = {}
-				.put (["Prototype_rids"], "b507779x6.prod;b507779x4.prod")
+				.put (["Prototype_rids"], "b507779x6.prod;b507779x4.prod;b507779x5.prod")
 				.put (["name"],carName)
 				.put (["parent_eci"], parentECI)
 
