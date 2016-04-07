@@ -46,7 +46,7 @@ ruleset trip_store {
 						parent = stuff{"relationship"} eq "Vehicle";
 						namespace && parent
 					}
-				);
+				).klog("Parent post-filter: ");
 			parent{"target_eci"}
 		}
 	}
