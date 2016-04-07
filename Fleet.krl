@@ -16,7 +16,7 @@ ruleset manage_fleet {
 
 		sendQuery = function(eci, mod, func) {
 			resp = http:get("#{cloud_url}#{mod}/#{func}", {}.put(["_eci"], eci));
-			code = response{"status_code"}.klog("response code from query: ");
+			code = resp{"status_code"}.klog("response code from query: ");
 			response_content = code{"content"}.decode();
 			response_content
 		}
