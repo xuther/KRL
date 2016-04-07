@@ -41,7 +41,7 @@ ruleset manage_fleet {
 				vehicles.map( function(x) {
 							stuff = x.values().head();
 							eci = stuff{"event_eci"}.klog("ECIS: ");
-							resp = sendQuery(eci, "b507779x5.prod","trip").klog("trips: ");
+							resp = sendQuery(eci, "b507779x5.prod","trips").klog("trips: ");
 							resp
 						}
 					);
