@@ -76,7 +76,7 @@ ruleset manage_fleet {
 		foreach vehicles setting (cur)
 		pre {
 			reportIndex = event:attr("_reportIndex").klog("Index of the report");
-			stuff = x.values().head();
+			stuff = cur.values().head();
 			eci = stuff{"event_eci"}.klog("ECI: ");
 		}
 		{
