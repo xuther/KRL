@@ -8,7 +8,7 @@ ruleset manage_fleet {
 		logging on 
 		sharing on
 		use module b507199x5 alias wranglerOS
-		provides generateReport
+		provides generateReport, sendQuery, getVehicles
 	}
 
 	global {
