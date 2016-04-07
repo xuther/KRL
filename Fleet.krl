@@ -48,7 +48,7 @@ ruleset manage_fleet {
 							toReturn
 						}
 					);
-				toReturn = {}.put (["Vehicles"],vehciles.length())
+				toReturn = {}.put (["Vehicles"],vehicles.length())
 				.put(["Reporting"],trips.length())
 				.put(["Trips"],trips);
 
