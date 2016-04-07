@@ -42,7 +42,10 @@ ruleset manage_fleet {
 							stuff = x.values().head();
 							eci = stuff{"event_eci"}.klog("ECIS: ");
 							resp = sendQuery(eci, "b507779x5.prod","trips").klog("trips: ");
-							resp
+							toReturn = {}.put (["ECI"],eci)
+							.put(["Trips"], resp)
+
+							toReturn
 						}
 					);
 		}
