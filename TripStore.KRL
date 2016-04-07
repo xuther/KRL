@@ -47,7 +47,8 @@ ruleset trip_store {
 						namespace && parent
 					}
 				).klog("Parent post-filter: ");
-			parent{"target_eci"}
+			parValues = parent.values().head();
+			parValues{"target_eci"}
 		}
 	}
 
