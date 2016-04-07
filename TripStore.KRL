@@ -7,7 +7,7 @@ ruleset trip_store {
 		author "Joseph Blodgett"
 		logging on 
 		sharing on 
-		provides trips, long_trips, short_trips
+		provides trips, long_trips, short_trips, getParent
 	}
 
 	global {
@@ -33,6 +33,21 @@ ruleset trip_store {
 				});
 			
 			short;
+		}
+
+		getParent = function() {
+			WranglerIsConfusing = wranglerOS:subscriptions().klog("What we get back from first Layer: ");
+			subs = WranglerIsConfusing{"subscriptions"}.klog("What we get back from subscriptions: ");
+		}
+	}
+
+	rule genReport {
+		select when car report 
+		pre {
+			index = event:attr("reportIndex").klog("Index being sent.");
+			parent = getParent()
+		}
+		fired {
 		}
 	}
 	

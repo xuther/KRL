@@ -10,6 +10,13 @@ ruleset fleet_car {
 		sharing on
 	}
 
+	rule genReport {
+		select when car report 
+		pre {
+			index = event:attr("reportIndex").klog("Index being sent.");
+		}
+	}
+
 	rule subscribeToParent {
 		select when wrangler init_events
 		pre {

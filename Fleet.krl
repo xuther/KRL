@@ -8,7 +8,7 @@ ruleset manage_fleet {
 		logging on 
 		sharing on
 		use module b507199x5 alias wranglerOS
-		provides generateReport, sendQuery, getVehicles
+		provides generateReport, sendQuery, getVehicles, getReports
 	}
 
 	global {
@@ -53,6 +53,38 @@ ruleset manage_fleet {
 				.put(["Trips"],trips);
 
 				toReturn
+		}
+
+		getReports = function(){
+			reports = ent:reports
+			reports
+		}
+	}
+
+	rule getFleetReport {
+		select when fleet report 
+		foreach vehicles setting (cur)
+		pre {
+			stuff = x.values().head();
+			eci = stuff{"event_eci"}.klog("ECI: ");
+			index = ent:curReport
+		}
+		{
+			event:send({"cid":eci},"car","report") 
+			with attrs = {}
+			.put(["reportIndex"], index);
+		}
+	}
+
+	rule acceptReports {
+		select when fleet report_sent
+		pre {
+			carEci = event:attr("eci").klog("Car reporting: ");
+			trips = event:attr("trips").klog("Trips reported: ");
+			reportIndex = event:attr("index").klog("Report sent");
+		}
+		fired {
+			set ent:reports{[index, carEci]} trips.decode();
 		}
 	}
 
