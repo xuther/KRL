@@ -39,7 +39,15 @@ ruleset trip_store {
 		getParent = function() {
 			WranglerIsConfusing = wranglerOS:subscriptions().klog("What we get back from first Layer: ");
 			subs = WranglerIsConfusing{"subscriptions"}.klog("What we get back from subscriptions: ");
-			subs
+			parent = subs{"subscribed"}.filter(
+					function(x) {
+						stuff = x.values().head();
+						namespace = stuff{"namespace"} eq "Fleet_Subscription";
+						parent = stuff{"relationship"} eq "Vehicle";
+						namespace && parent
+					}
+				);
+			parent{"target_eci"}
 		}
 	}
 
