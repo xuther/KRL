@@ -61,18 +61,29 @@ ruleset manage_fleet {
 		}
 	}
 
-	rule getFleetReport {
+	rule getNextReport {
 		select when fleet report 
+		always {
+			set ent:reportIndex ent:reportIndex+1;
+
+			raise explicit event startReport with 
+			_reportIndex = ent:reportIndex;
+		}
+	}
+
+	rule getFleetReport {
+		select when explicit startReport 
 		foreach vehicles setting (cur)
 		pre {
+			reportIndex = event:attr("_reportIndex").klog("Index of the report");
 			stuff = x.values().head();
 			eci = stuff{"event_eci"}.klog("ECI: ");
-			index = ent:curReport
 		}
 		{
 			event:send({"cid":eci},"car","report") 
 			with attrs = {}
-			.put(["reportIndex"], index);
+			.put(["reportIndex"], reportIndex)
+			.put(["parent"], meta:eci());
 		}
 	}
 
@@ -81,10 +92,13 @@ ruleset manage_fleet {
 		pre {
 			carEci = event:attr("eci").klog("Car reporting: ");
 			trips = event:attr("trips").klog("Trips reported: ");
-			reportIndex = event:attr("index").klog("Report sent");
+			reportIndex = event:attr("reportIndex").klog("Report sent");
+			numReported = ent:reports{[reportIndex, "Reported"]};
 		}
 		fired {
-			set ent:reports{[index, carEci]} trips.decode();
+			set ent:reports{[reportIndex, carEci]} trips.decode();
+			set ent:reports{[reportIndex, "Reported"]} ent:reports{[reportIndex, "Reported"]}+1;
+			log("Got a report: ");
 		}
 	}
 
