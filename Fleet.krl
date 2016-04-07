@@ -56,8 +56,10 @@ ruleset manage_fleet {
 			
 		}
 		{
-			event:send({"cid":meta:eci()},"wrangler", "child_deletion")
-			with deletionTarget = picoECIToDelete;
+			event:send({"cid":meta:eci()}, "wrangler", "child_deletion") 
+				with attrs = {}.put(["deletionTarget"], picoECIToDelete).klog("attributes for delete: ");
+		    //event:send({"cid":meta:eci()}, "wrangler", "subscription_cancellation") 
+				//with attrs = {}.put(["channel_name"], name).klog("attributes for unsubscription: ");
 		}
 		always {
 			//if(children.keys([picoECIToDelete]).length() > 0);
