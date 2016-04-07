@@ -55,13 +55,13 @@ ruleset trip_store {
 	rule genReport {
 		select when car report 
 		pre {
-			index = event:attr("reportIndex").klog("Index being sent: ");
+			reportIndex = event:attr("reportIndex").klog("Index being sent: ");
 			parent = event:attr("parent").klog("Parent to report to: ");
 			trips = trips();
 
 			attributes = {}
 			.put (["eci"], meta:eci())
-			.put (["index"], index)
+			.put (["reportIndex"], reportIndex)
 			.put (["trips"], trips);
 		}
 		{
