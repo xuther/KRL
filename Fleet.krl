@@ -60,7 +60,6 @@ ruleset manage_fleet {
 			with deletionTarget = picoECIToDelete;
 		}
 		always {
-
 			//if(children.keys([picoECIToDelete]).length() > 0);
 			log("deleting child Pico");
 		}
