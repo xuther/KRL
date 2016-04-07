@@ -23,11 +23,11 @@ ruleset manage_fleet {
 
 		getVehicles = function() {
 			//Whaaaa?
-			WranglerIsConfusing = wranglerOS:subscriptions().klog("What we get back from subscriptions: ");
-			subs = WranglerIsConfusing{"subscriptions"};
+			WranglerIsConfusing = wranglerOS:subscriptions();
+			subs = WranglerIsConfusing{"subscriptions"}.klog("What we get back from subscriptions: ");
 			vehicles = subs{"suscribed"}.filter(
 						function(x) {
-							stuff = x.values().head();
+							stuff = x.values().head().klog("HEAD VALUES: ");
 							stuff{"name_space"} eq "Fleet_Subscription"
 						}
 				)
