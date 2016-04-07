@@ -38,16 +38,21 @@ ruleset manage_fleet {
 		generateReport = function()
 		{
 				vehicles = getVehicles().klog("YO. Here be your vehicles, maybe: ");			
-				vehicles.map( function(x) {
+				trips = vehicles.map( function(x) {
 							stuff = x.values().head();
 							eci = stuff{"event_eci"}.klog("ECIS: ");
 							resp = sendQuery(eci, "b507779x5.prod","trips").klog("trips: ");
 							toReturn = {}.put (["ECI"],eci)
-							.put(["Trips"], resp)
+							.put(["Trips"], resp);
 
 							toReturn
 						}
 					);
+				toReturn = {}.put (["Vehicles"],vehciles.length())
+				.put(["Reporting"],trips.length())
+				.put(["Trips"],trips)
+
+				toReturn
 		}
 	}
 
