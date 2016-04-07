@@ -30,15 +30,21 @@ ruleset manage_fleet {
 							stuff = x.values().head().klog("HEAD VALUES: ");
 							stuff{"name_space"} eq "Fleet_Subscription"
 						}
-				)
+				);
 			vehicles
 		}
 
 
 		generateReport = function()
 		{
-				letsseeifwegetaAnything = getVehicles().klog("YO. Here be your vehicles, maybe: ");			
-				letsseeifwegetaAnything;
+				vehicles = getVehicles().klog("YO. Here be your vehicles, maybe: ");			
+				vehicles.map( function(x) {
+							stuff = x.values().head();
+							eci = stuff{"event_eci"}.klog("ECIS: ");
+							resp = sendQuery(eci, "b507779x7.prod","trip").klog("trips: ");
+							resp
+						}
+					);
 		}
 	}
 
