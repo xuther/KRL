@@ -57,7 +57,7 @@ ruleset trip_store {
 		pre {
 			reportIndex = event:attr("reportIndex").klog("Index being sent: ");
 			parent = event:attr("parent").klog("Parent to report to: ");
-			trips = trips();
+			trips = trips().klog("trips");
 
 			attributes = {}
 			.put (["eci"], meta:eci())
