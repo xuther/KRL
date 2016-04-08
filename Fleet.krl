@@ -73,7 +73,7 @@ ruleset manage_fleet {
 
 	rule getFleetReport {
 		select when explicit startReport 
-		foreach vehicles() setting (cur)
+		foreach getVehicless() setting (cur)
 		pre {
 			reportIndex = event:attr("_reportIndex").klog("Index of the report");
 			stuff = cur.values().head().klog("HEAD VALUES: ");
